@@ -5,9 +5,9 @@
         <el-submenu index="1" >
           <template slot="title"><i class="el-icon-user"></i>人员伤亡及失踪</template>
           <el-menu-item-group>
-            <el-menu-item index="1-1"><el-link href="#/mshd/people">死亡</el-link></el-menu-item>
-            <el-menu-item index="1-2"><el-link href="#/mshd/peoplehurt">受伤</el-link></el-menu-item>
-            <el-menu-item index="1-3"><el-link href="#/mshd/peoplemiss">失踪</el-link></el-menu-item>
+            <el-menu-item index="1-1"><el-link href="people">死亡</el-link></el-menu-item>
+            <el-menu-item index="1-2"><el-link href="peoplehurt">受伤</el-link></el-menu-item>
+            <el-menu-item index="1-3"><el-link href="peoplemiss">失踪</el-link></el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="2">
