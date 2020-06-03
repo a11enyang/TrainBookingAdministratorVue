@@ -170,7 +170,7 @@
       deletePeople(rowData) {
         //删除相应的人
         console.log(rowData);
-        this.$http.post("http://101.37.33.218:8082/api//people/deleteOne/" + rowData.id)
+        this.$http.post("/api//people/deleteOne/" + rowData.id)
           .then(res => {
             if (res.data.status) {
               this.successResult();
@@ -197,7 +197,7 @@
         if (page === undefined) {
           page = this.pageNow
         }
-        this.$http.post("http://101.37.33.218:8082/api/people/page/" + page)
+        this.$http.post("/api/people/page/" + page)
           .then(
             res => {
               this.peoples = res.data.onePageContent;
@@ -217,7 +217,7 @@
       saveInfo() {
         this.dialogFormVisible = false;
         //上传信息之后
-        this.$http.post("http://101.37.33.218:8082/api/people/updateOne", this.editForm)
+        this.$http.post("/api/people/updateOne", this.editForm)
           .then(res => {
             if (res.data.status) {
               this.successResult();
@@ -231,7 +231,7 @@
 
       //搜索内容
       searchContent() {
-        this.$http.post("http://101.37.33.218:8082/api/people/findAllWithSpecification", this.searchForm)
+        this.$http.post("/api/people/findAllWithSpecification", this.searchForm)
           .then(res => {
             // this.peoples = res.data;
             this.peoples = res.data;

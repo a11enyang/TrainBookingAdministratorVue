@@ -40,20 +40,6 @@ const router =  new Router({
         }
       ]
     },
-    // {
-    //   path: '/mshd', component: Mshd,
-    //   children: [
-    //     {path: 'people', component: People},
-    //     {path: 'peoplehurt', component: PeopleHurt},
-    //     {path: 'peoplemiss', component: PeopleMiss},
-    //     {path: 'house', component: House},
-    //     {path: 'housekj', component: HouseKJ},
-    //     {path: 'houseqt', component: HouseQT},
-    //     {path: 'housezh', component: HouseZH},
-    //     {path: 'housezm', component: HouseZM},
-    //   ]
-    // },
-    {path: '/mshd', redirect: '/mshd/people'},
     {path: "/login", component: Login},
   ]
 })
@@ -65,6 +51,9 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/login') return next()
   // 获取token
   const tokenStr = window.sessionStorage.getItem('token')
+  console.log("++++++++++++");
+  console.log(tokenStr);
+  console.log("++++++++++++");
   // 没有token, 强制跳转到登录页
   if (!tokenStr) return next('/login')
   next()

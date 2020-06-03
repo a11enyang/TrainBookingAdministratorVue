@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-col offset="8" :span="12">
+    <el-col :offset="8" :span="12">
       <el-upload
         class="upload-demo"
         drag
@@ -12,7 +12,6 @@
       </el-upload>
     </el-col>
   </el-row>
-
 </template>
 
 <script>

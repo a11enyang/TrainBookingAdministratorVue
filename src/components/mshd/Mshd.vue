@@ -5,19 +5,19 @@
         <el-submenu index="1" >
           <template slot="title"><i class="el-icon-user"></i>人员伤亡及失踪</template>
           <el-menu-item-group>
-            <el-menu-item index="1-1"><el-link href="people">死亡</el-link></el-menu-item>
-            <el-menu-item index="1-2"><el-link href="peoplehurt">受伤</el-link></el-menu-item>
-            <el-menu-item index="1-3"><el-link href="peoplemiss">失踪</el-link></el-menu-item>
+            <el-menu-item index="1-1"><el-link href="#/layout/mshd/people">死亡</el-link></el-menu-item>
+            <el-menu-item index="1-2"><el-link href="#/layout/mshd/peoplehurt">受伤</el-link></el-menu-item>
+            <el-menu-item index="1-3"><el-link href="#/layout/mshd/peoplemiss">失踪</el-link></el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="2">
           <template slot="title"><i class="el-icon-s-home"></i>房屋破坏</template>
           <el-menu-item-group>
-            <el-menu-item index="2-1"><el-link href="#/mshd/house">土木</el-link></el-menu-item>
-            <el-menu-item index="2-2"><el-link href="#/mshd/houseZM">砖木</el-link></el-menu-item>
-            <el-menu-item index="2-3"><el-link href="#/mshd/houseZH">砖混</el-link></el-menu-item>
-            <el-menu-item index="2-4"><el-link href="#/mshd/houseKJ">框架</el-link></el-menu-item>
-            <el-menu-item index="2-5"><el-link href="#/mshd/houseQT">其他</el-link></el-menu-item>
+            <el-menu-item index="2-1"><el-link href="#/layout/mshd/house">土木</el-link></el-menu-item>
+            <el-menu-item index="2-2"><el-link href="#/layout/mshd/housezm">砖木</el-link></el-menu-item>
+            <el-menu-item index="2-3"><el-link href="#/layout/mshd/housezh">砖混</el-link></el-menu-item>
+            <el-menu-item index="2-4"><el-link href="#/layout/mshd/housekj">框架</el-link></el-menu-item>
+            <el-menu-item index="2-5"><el-link href="#/layout/mshd/houseqt">其他</el-link></el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="3">

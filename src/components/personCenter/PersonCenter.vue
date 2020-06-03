@@ -12,8 +12,7 @@
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">立即修改</el-button>
-          <el-button>取消</el-button>
+          <el-button type="primary" @click="onSubmit">立即更新</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -31,21 +30,42 @@
         form: {
           name: '',
           password: "",
+          token: "",
         }
       }
     },
     methods: {
       onSubmit() {
-        console.log('submit!');
+        this.form.token = window.sessionStorage.getItem("token");
+        this.$http.post("/api/updatemanager", this.form)
+                  .then(res =>
+                    {
+                      if (res.data.status){
+                        this.successResult();
+                        this.findManager();
+                      }
+                    }
+                  )
+      },
+      successResult() {
+        this.$message({
+          message: '操作成功!',
+          type: 'success'
+        });
+      },
+      failResult() {
+        this.$message.error('操作失败!');
+      },
+      findManager(){
+        this.$http.post("/personal/"+window.sessionStorage.token)
+          .then(res => {
+            this.form.name = res.data.name;
+            this.form.password = res.data.password;
+          });
       }
     },
     created() {
-      console.log(window.sessionStorage);
-      this.$http.post("http://localhost:8082/personal/"+window.sessionStorage.token)
-                .then(res => {
-                  this.form.name = res.data.name;
-                  this.form.password = res.data.password;
-                });
+      this.findManager();
     }
   }
 </script>

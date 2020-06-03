@@ -10,10 +10,20 @@ import axios from 'axios'
 
 
 
-axios.defaults.baseURL = 'http://localhost:8082/'
+// axios.defaults.baseURL = 'http://localhost:8082/'
+axios.defaults.baseURL = "/apis"
 Vue.prototype.$http= axios
 Vue.use(ElementUI);
 Vue.config.productionTip = false
+
+
+axios.interceptors.request.use(config => {
+  config.headers.Authorization = "Bearer " + window.sessionStorage.getItem("token");
+  console.log("============");
+  console.log(config);
+  console.log("============");
+  return config;
+})
 
 /* eslint-disable no-new */
 new Vue({
