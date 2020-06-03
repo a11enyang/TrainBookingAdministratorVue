@@ -24,6 +24,7 @@ import UserHouseKJ from "../components/user/userHouse/UserHouseKJ";
 import UserHouseQT from "../components/user/userHouse/UserHouseQT";
 import UserHouseZH from "../components/user/userHouse/UserHouseZH";
 import UserHouseZM from "../components/user/userHouse/UserHouseZM";
+import UserRequest from "../components/user/UserRequest";
 
 Vue.use(Router)
 
@@ -54,6 +55,7 @@ const router = new Router({
     {
       path: "/userlayout", component: UserLayout,
       children: [
+        {path: "userrequest", component: UserRequest},
         {
           path: "usermshd", component: UserMshd, children: [
             {path: "userpeople", component: UserPeople},
