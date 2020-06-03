@@ -1,6 +1,11 @@
-# element_users
+# 多源异构灾情系统
+- 技术框架： vue + element
+- 实现了密码的加密传输
+- 实现了对数据的增删改查
 
-> A Vue.js project
+
+
+
 
 ## Build Setup
 
