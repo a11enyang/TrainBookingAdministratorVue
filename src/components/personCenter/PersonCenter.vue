@@ -1,5 +1,4 @@
 <template>
-
   <el-row>
     <el-col :span="12" :offset="6">
       <el-form ref="form" :model="form" label-width="80px">
@@ -8,7 +7,7 @@
         </el-form-item>
 
         <el-form-item label="密码">
-          <el-input v-model="form.password"></el-input>
+          <el-input v-model="form.password" type="password"></el-input>
         </el-form-item>
 
         <el-form-item>

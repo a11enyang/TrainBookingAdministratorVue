@@ -16,11 +16,12 @@
           <el-form-item label="账号" prop="username">
             <el-input v-model="loginForm.username" prefix-icon="iconfont icon-user"></el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="password">
+          <el-form-item label="密码" prop="password" >
             <el-input
               v-model="loginForm.password"
               type="password"
               prefix-icon="iconfont icon-3702mima"
+              show-password
             ></el-input>
           </el-form-item>
           <el-form-item class="btns">
@@ -34,6 +35,7 @@
 </template>
 
 <script>
+  import aes from "../../utils/aes";
   export default {
     name: "Login",
     data() {
@@ -41,6 +43,10 @@
         loginForm: {
           username: 'admin',
           password: '123456'
+        },
+        loginFormEncrypt: {
+          username: "",
+          password: "",
         },
         // 表单验证
         loginFormRules: {
@@ -60,7 +66,7 @@
       resetLoginForm() {
         // console.log(this)
         // resetFields：element-ui提供的表单方法
-        this.$refs.loginFormRef.resetFields()
+        this.$refs.loginFormRef.resetFields();
       },
       login() {
         // 表单预验证
@@ -70,10 +76,14 @@
           if (!valid) return false
           // this.$http.post('login', this.loginForm): 返回值为promise
           // 返回值为promise，可加await简化操作 相应的也要加async
-          const {data: res} = await this.$http.post('/login', this.loginForm)
+          this.loginFormEncrypt.username = this.loginForm.username;
+          this.loginFormEncrypt.password = aes.encrypt(this.loginForm.password);
+          console.log(this.loginFormEncrypt.password);
+          console.log(  aes.decrypt(this.loginFormEncrypt.password));
+          const {data: res} = await this.$http.post('/login', this.loginFormEncrypt)
           // const result = await this.$http.post('http://localhost:9191/login', this.loginForm)
           // console.log(result)
-          if (res.meta.status !== 200) return this.$message.error('登录失败')
+          if (res.meta.status !== 200) return this.$message.error('用户名或者密码不对,登录失败')
           this.$message.success('登录成功')
           // // 1、将登陆成功之后的token, 保存到客户端的sessionStorage中; localStorage中是持久化的保存
           // //   1.1 项目中出现了登录之外的其他API接口，必须在登陆之后才能访问

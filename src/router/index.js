@@ -14,12 +14,22 @@ import Request from "../components/request/Request";
 import Login from "../components/login/Login";
 import Layout from "../components/layout/Layout";
 import PersonCenter from "../components/personCenter/PersonCenter";
+import UserLayout from "../components/user/UserLayout";
+import UserMshd from "../components/user/UserMshd";
+import UserPeople from "../components/user/userPeople/UserPeople";
+import UserPeopleHurt from "../components/user/userPeople/UserPeopleHurt";
+import UserPeopleMiss from "../components/user/userPeople/UserPeopleMiss";
+import UserHouse from "../components/user/userHouse/UserHouse";
+import UserHouseKJ from "../components/user/userHouse/UserHouseKJ";
+import UserHouseQT from "../components/user/userHouse/UserHouseQT";
+import UserHouseZH from "../components/user/userHouse/UserHouseZH";
+import UserHouseZM from "../components/user/userHouse/UserHouseZM";
 
 Vue.use(Router)
 
-const router =  new Router({
+const router = new Router({
   routes: [
-    {path: '/', redirect: '/login'},
+    // {path: '/', redirect: '/login'},
     {
       path: "/layout", component: Layout,
       children: [
@@ -41,6 +51,25 @@ const router =  new Router({
       ]
     },
     {path: "/login", component: Login},
+    {
+      path: "/userlayout", component: UserLayout,
+      children: [
+        {
+          path: "usermshd", component: UserMshd, children: [
+            {path: "userpeople", component: UserPeople},
+            {path: "userpeoplehurt", component: UserPeopleHurt},
+            {path: "userpeoplemiss", component: UserPeopleMiss},
+            {path: "userhouse", component: UserHouse},
+            {path: "userhousekj", component: UserHouseKJ},
+            {path: "userhouseqt", component: UserHouseQT},
+            {path: "userhousezh", component: UserHouseZH},
+            {path: "userhousezm", component: UserHouseZM},
+          ]
+        },
+
+      ]
+
+    },
   ]
 })
 
@@ -49,6 +78,12 @@ const router =  new Router({
 router.beforeEach((to, from, next) => {
   // 访问登录页，放行
   if (to.path === '/login') return next()
+
+  console.log(to.path);
+
+  //如果是用户端的内容,放行
+  if (to.path.indexOf("/userlayout") !== -1) return next();
+
   // 获取token
   const tokenStr = window.sessionStorage.getItem('token')
   console.log("++++++++++++");
