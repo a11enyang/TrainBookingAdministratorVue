@@ -3,9 +3,7 @@
     <el-header>
       <!--导航菜单-->
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-        <el-menu-item index="/layout/mshd/people">多源灾情数据库管理面板</el-menu-item>
-        <el-menu-item index="/layout/fileupload">文件上传</el-menu-item>
-        <el-menu-item index="/layout/requests">请求处理</el-menu-item>
+        <el-menu-item index="/layout/systemcenter/ticketuser">火车售票系统管理面板</el-menu-item>
         <el-submenu index="2-4">
           <template slot="title">个人中心</template>
           <el-menu-item index="/layout/personal">管理者中心</el-menu-item>

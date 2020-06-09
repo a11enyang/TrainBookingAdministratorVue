@@ -2,34 +2,35 @@
   <div>
     <el-row style="margin-bottom: 10px">
       <el-col :span="12">
-        <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item ><el-button size="medium" type="danger" round>房屋破坏</el-button></el-breadcrumb-item>
-          <el-breadcrumb-item ><el-button size="medium" type="danger" round>其他</el-button></el-breadcrumb-item>
-        </el-breadcrumb>
+          <el-breadcrumb-item ><el-button size="medium" type="danger" round>普通用户管理</el-button></el-breadcrumb-item>
       </el-col>
       <el-col :span="8" :offset="4">
         <el-button @click="dialog = true" type="primary" size="medium">搜索相关内容</el-button>
         <el-button @click="findAllPeoples(1 )" type="success" size="medium">显示所有内容</el-button>
       </el-col>
     </el-row>
-    <el-table :data="peoples">
-      <el-table-column label="编码" prop="code">
+    <el-table :data="ordinaryUsers">
+      <el-table-column label="id" prop="id" width="100">
       </el-table-column>
-      <el-table-column label="位置" prop="location">
+      <el-table-column label="姓名" prop="name" width="100">
       </el-table-column>
-      <el-table-column label="日期" prop="date">
+      <el-table-column label="密码" prop="password" width="100">
       </el-table-column>
-      <el-table-column label="基本完好面积" prop="number">
+      <el-table-column label="邮箱" prop="email" width="100">
       </el-table-column>
-      <el-table-column label="破坏面积" prop="number">
+      <el-table-column label="电话号码" prop="phonenum" width="100">
       </el-table-column>
-      <el-table-column label="毁坏面积" prop="number">
+      <el-table-column label="身份证" prop="personId" width="100">
       </el-table-column>
-      <el-table-column label="基本描述" prop="number">
+      <el-table-column label="类型" prop="type" width="100">
       </el-table-column>
-      <el-table-column label="上报单位" prop="reporting_unit">
+      <el-table-column label="余额" prop="balance" width="100">
       </el-table-column>
-      <el-table-column fixed="right" label="操作" width="180">
+      <el-table-column label="是否是学生" prop="isstudent" width="100">
+      </el-table-column>
+      <el-table-column label="是否拉入黑名单" prop="credit" width="100">
+      </el-table-column>
+      <el-table-column fixed="right" label="操作 " width="200">
         <template slot-scope="scope">
           <el-button @click="deletePeople(scope.row)" type="danger" size="small">删除</el-button>
           <el-button type="primary" size="small" @click="editPeople(scope.row)">编辑</el-button>
@@ -55,20 +56,29 @@
     <!--编辑弹出框-->
     <el-dialog title="编辑信息" :visible.sync="dialogFormVisible" center>
       <el-form :model="editForm">
-        <el-form-item label="编码" :label-width="formLabelWidth">
-          <el-input v-model="editForm.code" autocomplete="off"></el-input>
+        <el-form-item label="姓名" :label-width="formLabelWidth">
+          <el-input v-model="editForm.name" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="位置" :label-width="formLabelWidth">
-          <el-input v-model="editForm.location" autocomplete="off"></el-input>
+        <el-form-item label="邮箱" :label-width="formLabelWidth">
+          <el-input v-model="editForm.email" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="日期" :label-width="formLabelWidth">
-          <el-input v-model="editForm.date" autocomplete="off"></el-input>
+        <el-form-item label="电话号码" :label-width="formLabelWidth">
+          <el-input v-model="editForm.phonenum" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="人数" :label-width="formLabelWidth">
-          <el-input v-model="editForm.number" autocomplete="off"></el-input>
+        <el-form-item label="身份证" :label-width="formLabelWidth">
+          <el-input v-model="editForm.personId" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="上报单位" :label-width="formLabelWidth">
-          <el-input v-model="editForm.reporting_unit" autocomplete="off"></el-input>
+        <el-form-item label="类型" :label-width="formLabelWidth">
+          <el-input v-model="editForm.type" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="余额" :label-width="formLabelWidth">
+          <el-input v-model="editForm.balance" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="是否是学生" :label-width="formLabelWidth">
+          <el-input v-model="editForm.isstudent" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="是否拉入黑名单" :label-width="formLabelWidth">
+          <el-input v-model="editForm.credit" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -88,21 +98,17 @@
     >
       <div class="demo-drawer__content">
         <el-form :model="searchForm">
-          <el-form-item label="编码" :label-width="searchFormLabelWidth">
-            <el-input v-model="searchForm.code" autocomplete="off" style="width: 80%" minlength="0"></el-input>
+          <el-form-item label="名字" :label-width="searchFormLabelWidth">
+            <el-input v-model="searchForm.name" autocomplete="off" style="width: 80%" minlength="0"></el-input>
           </el-form-item>
-          <el-form-item label="位置" :label-width="searchFormLabelWidth">
-            <el-input v-model="searchForm.location" autocomplete="off" style="width: 80%" minlength="0"></el-input>
+          <el-form-item label="邮箱" :label-width="searchFormLabelWidth">
+            <el-input v-model="searchForm.email" autocomplete="off" style="width: 80%" minlength="0"></el-input>
           </el-form-item>
-          <el-form-item label="日期" :label-width="searchFormLabelWidth">
-            <el-input v-model="searchForm.date" autocomplete="off" style="width: 80%" minlength="0"></el-input>
+          <el-form-item label="电话号码" :label-width="searchFormLabelWidth">
+            <el-input v-model="searchForm.phonenum" autocomplete="off" style="width: 80%" minlength="0"></el-input>
           </el-form-item>
-          <el-form-item label="人数" :label-width="searchFormLabelWidth">
-            <el-input v-model="searchForm.number" autocomplete="off" style="width: 80%" minlength="0"></el-input>
-          </el-form-item>
-          <el-form-item label="上报单位" :label-width="searchFormLabelWidth">
-            <el-input v-model="searchForm.reporting_unit" autocomplete="off" style="width: 80%"
-                      minlength="0"></el-input>
+          <el-form-item label="身份证" :label-width="searchFormLabelWidth">
+            <el-input v-model="searchForm.personId" autocomplete="off" style="width: 80%" minlength="0"></el-input>
           </el-form-item>
         </el-form>
         <div class="demo-drawer__footer">
@@ -120,7 +126,7 @@
 
 <script>
   export default {
-    name: "HouseQT",
+    name: "OrdinUser",
     data() {
       return {
         total: 10,
@@ -129,13 +135,18 @@
         dialog: false,
         loading: false,
         searchForm: {
-          code: null,
-          location: null,
-          date: null,
-          number: null,
-          reporting_unit: null,
+          id: "",
+          name: "",
+          password: "",
+          personId: "",
+          email: "",
+          phonenum: "",
+          type: "",
+          balance: "",
+          isstudent: "",
+          credit: ""
         },
-        searchFormLabelWidth: '80px',
+        searchFormLabelWidth: '130px',
         timer: null,
         //搜索弹出框end
 
@@ -144,18 +155,23 @@
         dialogFormVisible: false,
         formLabelWidth: '120px',
         editForm: {
-          id: null,
-          code: "",
-          location: "",
-          date: "",
-          number: "",
-          reporting_unit: ""
+          id: "",
+          name: "",
+          password: "",
+          personId: "",
+          email: "",
+          phonenum: "",
+          type: "",
+          balance: "",
+          isstudent: "",
+          credit: "",
+          realname: ""
         },
         //编辑弹出框end
 
-        //数据组
-        peoples: []
-        //数据组end
+        //数据列表begin
+        ordinaryUsers: []
+        //数据列表end
       }
     },
     methods: {
@@ -176,7 +192,7 @@
       deletePeople(rowData) {
         //删除相应的人
         console.log(rowData);
-        this.$http.post("/api/people/deleteOne/" + rowData.id)
+        this.$http.post("/administratorapi/ordinaryuser/delete/" + rowData.id)
           .then(res => {
             if (res.data.status) {
               this.successResult();
@@ -190,12 +206,15 @@
       //编辑信息
       editPeople(rowData) {
         this.dialogFormVisible = true;
-        this.editForm.code = rowData.code;
-        this.editForm.location = rowData.location;
-        this.editForm.number = rowData.number;
-        this.editForm.date = rowData.date;
-        this.editForm.reporting_unit = rowData.reporting_unit;
         this.editForm.id = rowData.id;
+        this.editForm.name = rowData.name;
+        this.editForm.personId = rowData.personId;
+        this.editForm.email = rowData.email;
+        this.editForm.phonenum = rowData.phonenum;
+        this.editForm.type = rowData.type;
+        this.editForm.balance = rowData.balance;
+        this.editForm.isstudent = rowData.isstudent;
+        this.editForm.credit = rowData.credit;
       },
 
       //查找所有的人
@@ -203,10 +222,10 @@
         if (page === undefined) {
           page = this.pageNow
         }
-        this.$http.post("/api/people/page/" + page)
+        this.$http.post("/administratorapi/ordinaryuser/page/" + page)
           .then(
             res => {
-              this.peoples = res.data.onePageContent;
+              this.ordinaryUsers = res.data.onePageContent;
               this.total = res.data.totalElements;
             }
           )
@@ -223,7 +242,7 @@
       saveInfo() {
         this.dialogFormVisible = false;
         //上传信息之后
-        this.$http.post("/api/people/updateOne", this.editForm)
+        this.$http.post("/administratorapi/ordinaryuser/updateOne", this.editForm)
           .then(res => {
             if (res.data.status) {
               this.successResult();
@@ -237,10 +256,10 @@
 
       //搜索内容
       searchContent() {
-        this.$http.post("/api/people/findAllWithSpecification", this.searchForm)
+        this.$http.post("/administratorapi/ordinaryuser/search", this.searchForm)
           .then(res => {
             // this.peoples = res.data;
-            this.peoples = res.data;
+            this.ordinaryUsers = res.data;
           })
         this.$refs.drawer.closeDrawer();
       },

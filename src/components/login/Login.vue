@@ -78,12 +78,10 @@
           // 返回值为promise，可加await简化操作 相应的也要加async
           this.loginFormEncrypt.username = this.loginForm.username;
           this.loginFormEncrypt.password = aes.encrypt(this.loginForm.password);
-          console.log(this.loginFormEncrypt.password);
-          console.log(  aes.decrypt(this.loginFormEncrypt.password));
-          const {data: res} = await this.$http.post('/login', this.loginFormEncrypt)
+          const {data: res} = await this.$http.post('/administrator/login', this.loginFormEncrypt)
           // const result = await this.$http.post('http://localhost:9191/login', this.loginForm)
-          // console.log(result)
-          if (res.meta.status !== 200) return this.$message.error('用户名或者密码不对,登录失败')
+          console.log(res)
+          if (res.meta.status) return this.$message.error('用户名或者密码不对,登录失败')
           this.$message.success('登录成功')
           // // 1、将登陆成功之后的token, 保存到客户端的sessionStorage中; localStorage中是持久化的保存
           // //   1.1 项目中出现了登录之外的其他API接口，必须在登陆之后才能访问
@@ -91,7 +89,7 @@
           console.log(res.token);
           window.sessionStorage.setItem('token', res.token)
           // // 2、通过编程式导航跳转到后台主页, 路由地址为：/home
-          this.$router.push('/layout/mshd/people')
+          this.$router.push('/layout/systemcenter/ordinuser')
         })
       }
     }

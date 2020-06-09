@@ -56,10 +56,10 @@
         this.$message.error('操作失败!');
       },
       findManager(){
-        this.$http.post("/personal/"+window.sessionStorage.token)
+        this.$http.post("/administrator/administratorpersonal/"+window.sessionStorage.token)
           .then(res => {
-            this.form.name = res.data.name;
-            this.form.password = res.data.password;
+            this.form.name = res.data.administratorname;
+            this.form.password = res.data.administratorpwd;
           });
       }
     },
