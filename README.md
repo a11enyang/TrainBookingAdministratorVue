@@ -1,26 +1,17 @@
-# 火车订票系统管理端
-- 技术框架： vue + element
-- 实现了密码的加密传输
-- 实现了对数据的增删改查
+### 描述😃
+小学期火车售票系统系统管理端前端
 
+### 技术框架和相关库👨🏼‍💻
+Vue + Vue-cli + Vue-router + axios + element-ui
 
-
-
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
+### 使用方法🤔
+```
+npm install   初始化
+npm run dev  本地运行
+npm run build  项目打包
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### 内容🔥
+1️⃣将请求api从页面重奋力，降低耦合性
+2️⃣利用axios拦截器，对requet和response进行过滤；利用后端返回的状态码进行判断来确定是否发出警告
+
