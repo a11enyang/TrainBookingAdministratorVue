@@ -1,31 +1,39 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
 import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import less from "less";
 import axios from 'axios'
+import "./utils/utils";
+import utils from "./utils/utils";
+import addressmap from "./address/addressmap";
 
-
-
-// axios.defaults.baseURL = 'http://localhost:8082/'
-axios.defaults.baseURL = "/apis"
+axios.defaults.baseURL = '/apis'
 Vue.prototype.$http= axios
 Vue.use(ElementUI);
 Vue.config.productionTip = false
+Vue.prototype.$addressMap = addressmap
 
-
+//前端发起请求前进行拦截处理
 axios.interceptors.request.use(config => {
   config.headers.Authorization = "Bearer " + window.sessionStorage.getItem("token");
-  console.log("============");
-  console.log(config);
-  console.log("============");
   return config;
 })
 
-/* eslint-disable no-new */
+//后端请求的数据处理后再显示在页面上
+axios.interceptors.response.use( response => {
+  if (response.data.code === 1){
+    utils.error("操作失败");
+  }else if (response.data.code === 101){
+    utils.error("账号或密码错误")
+  }else{
+    return response;
+  }
+  return;
+})
+
+
+
 new Vue({
   el: '#app',
   router,

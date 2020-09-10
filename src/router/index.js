@@ -1,21 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Mshd from "../components/system/SystemCenter";
-import People from "../components/people/People";
-import Login from "../components/login/Login";
-import Layout from "../components/layout/Layout";
-import PersonCenter from "../components/personCenter/PersonCenter";
-import SystemCenter from "../components/system/SystemCenter";
-import TicketUser from "../components/systemPanel/TicketUser";
-import Ad from "../components/systemPanel/Ad";
-import OrdinUser from "../components/systemPanel/OrdinUser";
+import Login from "../pages/Login";
+import Layout from "../components/Layout";
+import PersonCenter from "../components/PersonCenter";
+import SystemCenter from "../components/SystemCenter";
+import TicketUser from "../components/TicketUser";
+import Ad from "../components/Ad";
+import OrdinUser from "../components/OrdinUser";
 
 Vue.use(Router)
 
 const router = new Router({
   routes: [
-    // {path: '/', redirect: '/login'},
     {
+
       path: "/layout", component: Layout,
       children: [
         {path: "personal", component: PersonCenter},
@@ -40,7 +38,7 @@ router.beforeEach((to, from, next) => {
   // 获取token
   const tokenStr = window.sessionStorage.getItem('token')
   // 没有token, 强制跳转到登录页
-  if (!tokenStr) return next('/login')
+  if (!tokenStr) return next(this.$addressMap.LOGIN)
   next()
 })
 
