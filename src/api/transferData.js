@@ -52,6 +52,12 @@ export default {
   //管理员登录
   managerLogin(data){
     return Axios.post('/administrator/login', this.loginForm);
-  }
+  },
 
+  //获取系统日志的分页内容
+  findSystemLog(data){
+    return Axios.get("/administratorapi/systemlog/page/" + data);
+  },
+
+  //
 }

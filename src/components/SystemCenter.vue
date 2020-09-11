@@ -20,6 +20,12 @@
             <el-menu-item index="3-1"><el-link :href="ad">广告管理</el-link></el-menu-item>
           </el-menu-item-group>
         </el-submenu>
+        <el-submenu index="4">
+          <template slot="title"><i class="el-icon-truck"></i>系统运行状况</template>
+          <el-menu-item-group>
+            <el-menu-item index="3-1"><el-link :href="systemlog">系统日志</el-link></el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
       </el-menu>
     </el-aside>
 
@@ -43,7 +49,8 @@
       return {
         ad: "#"+this.$addressMap.AD,
         ordinuser: "#"+this.$addressMap.ORGINARYUSER,
-        ticketuser: "#"+this.$addressMap.TICKETUSER
+        ticketuser: "#"+this.$addressMap.TICKETUSER,
+        systemlog: "#"+this.$addressMap.SYSTEMLOG
       }
     },
   }

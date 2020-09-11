@@ -7,12 +7,16 @@ import axios from 'axios'
 import "./utils/utils";
 import utils from "./utils/utils";
 import addressmap from "./address/addressmap";
+import echarts from "echarts"
+
+
 
 axios.defaults.baseURL = '/apis'
 Vue.prototype.$http= axios
 Vue.use(ElementUI);
 Vue.config.productionTip = false
 Vue.prototype.$addressMap = addressmap
+Vue.prototype.$echarts = echarts
 
 //前端发起请求前进行拦截处理
 axios.interceptors.request.use(config => {

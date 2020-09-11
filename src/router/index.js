@@ -7,6 +7,7 @@ import SystemCenter from "../components/SystemCenter";
 import TicketUser from "../components/TicketUser";
 import Ad from "../components/Ad";
 import OrdinUser from "../components/OrdinUser";
+import SystemLog from "../components/SystemLog";
 
 Vue.use(Router)
 
@@ -22,6 +23,7 @@ const router = new Router({
             {path: 'ticketuser', component: TicketUser},
             {path: 'ad', component: Ad},
             {path: 'ordinuser', component: OrdinUser},
+            {path: 'systemlog', component: SystemLog}
           ]
         }
       ]
